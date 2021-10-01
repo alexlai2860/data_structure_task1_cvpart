@@ -1,3 +1,0 @@
-/home/alex/桌面/code/map/build/CMakeFiles/rebuild_cache.dir
-/home/alex/桌面/code/map/build/CMakeFiles/main.dir
-/home/alex/桌面/code/map/build/CMakeFiles/edit_cache.dir

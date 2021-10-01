@@ -40,14 +40,26 @@ public:
     ~Road() {}
 };
 
-typedef vector<Road> allRoad;
+typedef vector<Road> Roads;
+
+class Point
+{
+public:
+    cv::Point point;
+    int count;
+    Point() = default;
+    ~Point() {}
+};
+
+typedef vector<Point> points;
 
 class FindShortestPath
 {
 public:
+    double get_distance(cv::Point2f &a, cv::Point2f &b);
     void get_road_img(cv::Mat &src, Map &map);
     void cvRosenfeld(cv::Mat &src, cv::Mat &dst, Map &map);
-    vector<cv::Point> cross_point_identify(cv::Mat &thinSrc, Road &road);
+    vector<cv::Point> cross_point_identify(cv::Mat &thinSrc, Road &road, Point &point);
     void splitRoad(Road &road, Map &map);
     bool find_shortest_path(cv::Point2f &p1, cv::Point2f &p2);
     FindShortestPath() = default;

@@ -18,7 +18,8 @@ int main()
 {
     cv::Mat src;
     Map map1;
-    Road road1;
+    Road road;
+    Roads roads;
     Point point1;
     FindShortestPath find1;
     src = cv::imread("002.png");
@@ -27,14 +28,14 @@ int main()
     find1.cvRosenfeld(map1.binary_map, map1.thin_img, map1);
     cv::imshow("dst", map1.thin_img);
     cv::waitKey(200);
-    road1.cross_point = find1.cross_point_identify(map1.thin_img, road1, point1);
-    for (int i = 0; i < road1.cross_point.size(); i++)
+    point1.cross_point = find1.cross_point_identify(map1.thin_img, point1);
+    for (int i = 0; i < point1.cross_point.size(); i++)
     {
-        cv::circle(src, road1.cross_point[i], 2, cv::Scalar(0, 0, 255), 3);
-        cv::circle(map1.thin_img, road1.cross_point[i], 6, cv::Scalar(0, 0, 0), -1);
-        // find1.splitRoad(road1, map1);
+        cv::circle(src, point1.cross_point[i], 2, cv::Scalar(0, 0, 255), 3);
+        cv::circle(map1.thin_img, point1.cross_point[i], 14, cv::Scalar(0, 0, 0), -1);
     }
-    cout << road1.cross_point_num << endl;
+    find1.getRoadLength(src, roads, road, map1);
+    cout << point1.cross_point_num << endl;
     cv::imshow("dst2", src);
     cv::imshow("road_image2", map1.thin_img);
     cv::waitKey();

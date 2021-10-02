@@ -1,7 +1,7 @@
 /**
  * @file rosenfeld.cpp
  * @author alex
- * @brief 
+ * @brief 采用rosenfeld细化算法，细化道路
  * @version 0.1
  * @date 2021-09-26
  * 

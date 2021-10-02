@@ -1,8 +1,8 @@
 /**
  * @file cross_point_identify.cpp
  * @author alex
- * @brief 定义两个函数（求两点距离及求交点）
- * @version 0.1
+ * @brief 定义两个函数（求两点距离及求交点）(心力交瘁)
+ * @version 0.２
  * @date 2021-09-26
  * 
  * alex all rights reserved
@@ -20,7 +20,7 @@ double FindShortestPath::get_distance(cv::Point2f &a, cv::Point2f &b)
 	return distance;
 }
 
-vector<cv::Point> FindShortestPath::cross_point_identify(cv::Mat &thinSrc, Road &road, Point &point1)
+vector<cv::Point> FindShortestPath::cross_point_identify(cv::Mat &thinSrc, Point &point1)
 {
 	unsigned int raudis = 4, raudis2 = 15;
 	unsigned int thresholdMax = 12;
@@ -28,7 +28,7 @@ vector<cv::Point> FindShortestPath::cross_point_identify(cv::Mat &thinSrc, Road 
 	int width = thinSrc.cols;
 	int height = thinSrc.rows;
 	cv::Mat tmp, tmp2;
-	road.cross_point_num = 0;
+	point1.cross_point_num = 0;
 	thinSrc.copyTo(tmp);
 	thinSrc.copyTo(tmp2);
 	vector<cv::Point> points;
@@ -105,7 +105,7 @@ vector<cv::Point> FindShortestPath::cross_point_identify(cv::Mat &thinSrc, Road 
 					{
 						int x = points[n].x;
 						int y = points[n].y;
-						if (point1.point.x == x &&point1.point.y == y)
+						if (point1.point.x == x && point1.point.y == y)
 						{
 							accept = 0;
 							break;
@@ -114,7 +114,7 @@ vector<cv::Point> FindShortestPath::cross_point_identify(cv::Mat &thinSrc, Road 
 					if (accept)
 					{
 						points.push_back(point1.point);
-						road.cross_point_num++;
+						point1.cross_point_num++;
 						cout << point1.point.x << " " << point1.point.y << endl;
 					}
 				}

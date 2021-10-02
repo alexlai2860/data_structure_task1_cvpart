@@ -1,7 +1,7 @@
 /**
  * @file get_road_img.cpp
  * @author alex
- * @brief 
+ * @brief 图像预处理＆二值化，提取特定RGB值的区域(道路)
  * @version 0.1
  * @date 2021-09-26
  * 

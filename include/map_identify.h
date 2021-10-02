@@ -16,6 +16,7 @@
 
 using namespace std;
 
+//地图类，主要存放mat类对象
 class Map
 {
 public:
@@ -27,14 +28,13 @@ public:
     ~Map() {}
 };
 
+//道路类，包括每条道路的两个端点和道路长度
 class Road
 {
 public:
     cv::Point sidepoint[2];
     int road_num;
-    int cross_point_num;
-    int length;
-    vector<cv::Point> cross_point;
+    double length;
     vector<cv::Point> road;
     Road() = default;
     ~Road() {}
@@ -42,10 +42,13 @@ public:
 
 typedef vector<Road> Roads;
 
+//点类，用于查找和存放交叉点
 class Point
 {
 public:
     cv::Point point;
+    vector<cv::Point> cross_point;
+    int cross_point_num;
     int count;
     Point() = default;
     ~Point() {}
@@ -59,8 +62,9 @@ public:
     double get_distance(cv::Point2f &a, cv::Point2f &b);
     void get_road_img(cv::Mat &src, Map &map);
     void cvRosenfeld(cv::Mat &src, cv::Mat &dst, Map &map);
-    vector<cv::Point> cross_point_identify(cv::Mat &thinSrc, Road &road, Point &point);
-    void splitRoad(Road &road, Map &map);
+    vector<cv::Point> cross_point_identify(cv::Mat &thinSrc, Point &point);
+    bool getRoadLength(cv::Mat &src, Roads &roads, Road &road, Map &map);
+    bool getSidePoint(Road &road, Map &map);
     bool find_shortest_path(cv::Point2f &p1, cv::Point2f &p2);
     FindShortestPath() = default;
     ~FindShortestPath() {}

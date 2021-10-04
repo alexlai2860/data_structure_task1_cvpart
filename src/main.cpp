@@ -22,17 +22,19 @@ int main()
     Roads roads;
     Point point1;
     FindShortestPath find1;
+
     src = cv::imread("002.png");
     map1.src_map = src.clone();
     find1.get_road_img(map1.src_map, map1);
     find1.cvRosenfeld(map1.binary_map, map1.thin_img, map1);
     cv::imshow("dst", map1.thin_img);
     cv::waitKey(200);
-    point1.cross_point = find1.cross_point_identify(map1.thin_img, point1);
+
+    point1.cross_point = find1.cross_point_identify(map1.thin_img, point1); //寻找交叉点
     for (int i = 0; i < point1.cross_point.size(); i++)
     {
-        cv::circle(src, point1.cross_point[i], 2, cv::Scalar(0, 0, 255), 3);
-        cv::circle(map1.thin_img, point1.cross_point[i], 14, cv::Scalar(0, 0, 0), -1);
+        cv::circle(src, point1.cross_point[i], 2, cv::Scalar(0, 0, 255), 3);           //在原图上标注交叉点
+        cv::circle(map1.thin_img, point1.cross_point[i], 14, cv::Scalar(0, 0, 0), -1); //利用circle来分割各段道路
     }
     find1.getRoadLength(src, roads, road, map1);
     find1.getSidePoint(roads, map1, point1);

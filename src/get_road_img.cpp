@@ -9,12 +9,13 @@
  * 
  */
 
-#include"map_identify.h"
+#include "map_identify.h"
 #include <iostream>
 
 using namespace std;
 
-void FindShortestPath::get_road_img(cv::Mat &src,Map &map)
+//从截图中提取道路
+void FindShortestPath::get_road_img(cv::Mat &src, Map &map)
 {
     cv::Mat binary_img;
     cv::Scalar low = cv::Scalar(215, 245, 245);

@@ -20,6 +20,7 @@ double FindShortestPath::get_distance(cv::Point2f &a, cv::Point2f &b)
 	return distance;
 }
 
+//交叉点检测
 vector<cv::Point> FindShortestPath::cross_point_identify(cv::Mat &thinSrc, Point &point1)
 {
 	unsigned int raudis = 4, raudis2 = 15;

@@ -35,6 +35,7 @@ int main()
         cv::circle(map1.thin_img, point1.cross_point[i], 14, cv::Scalar(0, 0, 0), -1);
     }
     find1.getRoadLength(src, roads, road, map1);
+    find1.getSidePoint(roads, map1, point1);
     cout << point1.cross_point_num << endl;
     cv::imshow("dst2", src);
     cv::imshow("road_image2", map1.thin_img);

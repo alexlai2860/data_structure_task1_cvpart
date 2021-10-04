@@ -32,10 +32,10 @@ public:
 class Road
 {
 public:
-    cv::Point sidepoint[2];
+    int sidepoint_num[2];
     int road_num;
     double length;
-    vector<cv::Point> road;
+    vector<cv::Point> points;
     Road() = default;
     ~Road() {}
 };
@@ -64,7 +64,7 @@ public:
     void cvRosenfeld(cv::Mat &src, cv::Mat &dst, Map &map);
     vector<cv::Point> cross_point_identify(cv::Mat &thinSrc, Point &point);
     bool getRoadLength(cv::Mat &src, Roads &roads, Road &road, Map &map);
-    bool getSidePoint(Road &road, Map &map);
+    bool getSidePoint(Roads &roads, Map &map, Point &point);
     bool find_shortest_path(cv::Point2f &p1, cv::Point2f &p2);
     FindShortestPath() = default;
     ~FindShortestPath() {}

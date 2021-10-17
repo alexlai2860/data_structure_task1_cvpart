@@ -20,21 +20,30 @@ bool FindShortestPath::getRoadLength(cv::Mat &src, Roads &roads, Road &road, Map
 {
     vector<cv::Vec4i> hireachy;
     vector<vector<cv::Point>> contours;
+    cv::Mat src2 = src.clone();
     cv::findContours(map.thin_img, contours, hireachy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE, cv::Point());
-    cv::drawContours(src, contours, 34, cv::Scalar(255, 0, 255));
+    // cv::drawContours(src, contours, 56, cv::Scalar(0, 225, 255), 3);
+    cv::imshow("src1", src);
+    cv::waitKey(100);
     for (int i = 0; i < contours.size(); i++)
     {
         double length = cv::arcLength(contours[i], false);
         //注意，此处如果直接限定长度，会导致序号不匹配
         if (length > 10)
         {
-            road.length = length / 2;
-            road.points = contours[i];
-            roads.push_back(road);
-            //cout << "contourlength:" << roads[i].length << endl;
-            //cout << "pointstest" << roads[i].points[0].x << endl;
+        road.length = length / 2;
+        road.points = contours[i];
+        roads.push_back(road);
+        //cout << "contourlength:" << roads[i].length << endl;
+        //cout << "pointstest" << roads[i].points[0].x << endl;
         }
     }
+    /* vector<cv::Point> temp = roads[56].points;
+    vector<vector<cv::Point>> temp2;
+    temp2.push_back(temp);
+    cv::drawContours(src2, temp2, -1, cv::Scalar(0, 225, 255), 3);
+    cv::imshow("src2", src2);
+    cv::waitKey(100); */
     cout << "points size" << roads[1].points.size() << endl;
     return contours.size() > 0;
 }
@@ -86,11 +95,41 @@ bool FindShortestPath::getSidePoint(Roads &roads, Map &map, Point &point)
         int right_side_pointnum = pointDistance(point.cross_point, roads[i].points[x2_num]);
         roads[i].sidepoint_num[0] = left_side_pointnum;
         roads[i].sidepoint_num[1] = right_side_pointnum;
+
         //输出相关数据
         cout << "for road " << i << endl;
-        cout << "leftside point num :" << left_side_pointnum << " rightside point num :" << right_side_pointnum << endl;
+        cout << "leftside point num :" << roads[i].sidepoint_num[0] << " rightside point num :" << roads[i].sidepoint_num[1] << endl;
         cout << "length :" << roads[i].length << endl;
-    }
 
+        //test
+        cout << roads[5].sidepoint_num[0] << " " << roads[5].sidepoint_num[1] << endl;
+        cout << roads[10].sidepoint_num[0] << " " << roads[10].sidepoint_num[1] << endl;
+        cout << roads[15].sidepoint_num[0] << " " << roads[15].sidepoint_num[1] << endl;
+
+        
+    }
     return 1;
+}
+
+void FindShortestPath::delete_longer_road(Roads &roads)
+{
+    for (int i = 0; i < roads.size(); i++)
+    {
+        for (int j = 0; j < roads.size(); j++)
+        {
+            if (roads[i].sidepoint_num[0] == roads[j].sidepoint_num[0] && roads[i].sidepoint_num[1] == roads[i].sidepoint_num[1])
+            {
+                /* if(roads[i].length > roads[j].length)
+                {
+                    roads.erase(roads.begin() + i - 1);
+                } */
+                if (roads[i].length < roads[j].length)
+                {
+
+                    roads.erase(roads.begin() + j - 1);
+                    continue;
+                }
+            }
+        }
+    }
 }

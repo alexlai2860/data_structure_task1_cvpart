@@ -35,6 +35,7 @@ public:
     int sidepoint_num[2];     //道路端点
     double length;            //道路长度
     vector<cv::Point> points; //每条道路的轮廓
+    int id_num;               //道路代号
     Road() = default;
     ~Road() {}
 };
@@ -66,15 +67,16 @@ public:
     bool getRoadLength(cv::Mat &src, Roads &roads, Road &road, Map &map);   //获取道路长度
     bool getSidePoint(Roads &roads, Map &map, Point &point);                //获取端点
     bool find_shortest_path(cv::Point2f &p1, cv::Point2f &p2);              //获取最短路径(暂未定义)
+    void delete_longer_road(Roads &roads);                                  //删除两个节点间的较长路径(新增)
     FindShortestPath() = default;
     ~FindShortestPath() {}
 };
 
-//输出图像类，还没用上
+//输出图像类
 class ShowFinalImg
 {
 public:
-    bool show_final_img();
+    bool show_roads_img();
     ShowFinalImg() = default;
     ~ShowFinalImg() {}
 };

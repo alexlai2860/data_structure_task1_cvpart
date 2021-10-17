@@ -50,7 +50,7 @@ int main()
     cv::imshow("road_image2", map1.thin_img);
     cv::waitKey(1000);
 
-    //以下为(ctrl+v)的算法部分
+    //以下为最短路径的算法部分
     AdjacencyList adjacencyList;
     int originPos, endPos;
     GraphAdjList *GA = new GraphAdjList;

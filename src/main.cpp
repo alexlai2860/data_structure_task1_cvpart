@@ -40,8 +40,8 @@ int main()
     find1.getRoadLength(src, roads, road, map1);
     find1.getSidePoint(roads, map1, point1);
     //test
-    cv::circle(src, point1.cross_point[24], 2, cv::Scalar(0, 255, 0), 3);
-    cv::circle(src, point1.cross_point[7], 2, cv::Scalar(0, 255, 0), 3);
+    // cv::circle(src, point1.cross_point[24], 2, cv::Scalar(0, 255, 0), 3);
+    // cv::circle(src, point1.cross_point[7], 2, cv::Scalar(0, 255, 0), 3);
     //find1.delete_longer_road(roads);
     cout << roads.size() << endl;
     cout << point1.cross_point_num << endl;
@@ -62,7 +62,7 @@ int main()
     cin >> originPos;
     cout << "终点" << endl;
     cin >> endPos;
-    adjacencyList.ShowShortestResult(src, map1.thin_img, roads, originPos, endPos);
+    adjacencyList.ShowShortestResult(src, map1.thin_img, roads, point1, originPos, endPos);
     cv::imshow("result", src);
     cv::waitKey();
     return 0;

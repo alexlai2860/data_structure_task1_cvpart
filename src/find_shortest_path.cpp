@@ -141,7 +141,7 @@ void AdjacencyList::ShortestPath_Floyd(GraphAdjList *G, int (&P)[100][100], doub
     cout << D[24][7] << endl;
 }
 
-void AdjacencyList::ShowShortestResult(cv::Mat &src, cv::Mat &thinimg, Roads &roads, int originPos, int endPos)
+void AdjacencyList::ShowShortestResult(cv::Mat &src, cv::Mat &thinimg, Roads &roads, Point &point, int originPos, int endPos)
 {
     cv::Mat src2 = src.clone();
 
@@ -157,10 +157,12 @@ void AdjacencyList::ShowShortestResult(cv::Mat &src, cv::Mat &thinimg, Roads &ro
     while (temp != endPos)
     {
         way_points.push_back(temp);
+        cv::circle(src2,point.cross_point[temp], 3, cv::Scalar(0, 255, 0), 4);
         cout << temp << "——>";
         temp = ShortestPathmatrix[temp][endPos];
     }
     cout << endPos << endl;
+    cv::circle(src2,point.cross_point[endPos], 3, cv::Scalar(0, 255, 0), 4);
     way_points.push_back(endPos);
     for (int i = 0; i + 1 < way_points.size(); i++)
     {

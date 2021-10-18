@@ -53,7 +53,7 @@ public:
     //计算各个顶点之间最短路径
     void ShortestPath_Floyd(GraphAdjList *G, int (&P)[100][100], double (&D)[100][100]);
     //输出路径长度和具体路径
-    void ShowShortestResult(cv::Mat &src, cv::Mat &thinimg, Roads &roads, int originPos, int endPos);
+    void ShowShortestResult(cv::Mat &src, cv::Mat &thinimg, Roads &roads, Point &point, int originPos, int endPos);
     AdjacencyList() = default;
     ~AdjacencyList() {}
 };
